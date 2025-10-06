@@ -1,0 +1,24 @@
+{
+  "name": "quiqflowtraining",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/WaleedAllawie/QuiqflowTraining#readme",
+  "bugs": {
+    "url": "https://github.com/WaleedAllawie/QuiqflowTraining/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WaleedAllawie/QuiqflowTraining.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.7.0",
+    "typescript": "^5.9.3"
+  }
+}
