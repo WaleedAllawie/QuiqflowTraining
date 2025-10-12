@@ -14,10 +14,10 @@ function fetchUsers() {
   }, 1000);
 }
 
-function createUser(user) {
+function createUser(user, callback) {
   setTimeout(() => {
     users.push(user);
+    callback();
   }, 2000);
 }
-createUser({ name: "user4", id: 4 });
-fetchUsers();
+createUser({ name: "user4", id: 4 }, fetchUsers);
