@@ -1,1 +1,0 @@
-console.log("welcome to day 1")
