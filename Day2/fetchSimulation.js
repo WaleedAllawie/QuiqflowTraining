@@ -1,9 +1,9 @@
 //using callbacks and setTimeOUt
 
 const users = [
-  { name: "user1", id: 1 },
-  { name: "user2", id: 2 },
-  { name: "user3", id: 3 },
+  { name: 'user1', id: 1 },
+  { name: 'user2', id: 2 },
+  { name: 'user3', id: 3 },
 ];
 
 function fetchUsers() {
@@ -20,4 +20,4 @@ function createUser(user, callback) {
     callback();
   }, 2000);
 }
-createUser({ name: "user4", id: 4 }, fetchUsers);
+createUser({ name: 'user4', id: 4 }, fetchUsers);

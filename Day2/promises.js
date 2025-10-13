@@ -1,9 +1,9 @@
 //using promises
 
 const users = [
-  { name: "user1", id: 1 },
-  { name: "user2", id: 2 },
-  { name: "user3", id: 3 },
+  { name: 'user1', id: 1 },
+  { name: 'user2', id: 2 },
+  { name: 'user3', id: 3 },
 ];
 
 function fetchUsers() {
@@ -22,12 +22,12 @@ function createUser(user) {
       if (!err) {
         resolve();
       } else {
-        reject("Error");
+        reject('Error');
       }
     });
   }, 2000);
 }
 
-createUser({ name: "user4", id: 4 })
+createUser({ name: 'user4', id: 4 })
   .then(fetchUsers)
   .catch((err) => console.log(err));

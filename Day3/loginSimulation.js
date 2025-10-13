@@ -4,9 +4,9 @@ export class User {
     this.name = name;
     this.email = email;
     this.password = password;
-    this.role = "user";
+    this.role = 'user';
     this.isLoggedIn = false;
-    this.profile = { bio: "", website: "" };
+    this.profile = { bio: '', website: '' };
     User.users.push(this);
   }
   logIn(email, password) {
@@ -15,7 +15,7 @@ export class User {
       console.log(`The user ${this.name} is logged in`);
       return true;
     } else {
-      console.log("email or password are incorrect, login failed");
+      console.log('email or password are incorrect, login failed');
       return false;
     }
   }
@@ -30,14 +30,14 @@ export class User {
 export class Admin extends User {
   constructor(name, email, password) {
     super(name, email, password);
-    this.role = "admin";
+    this.role = 'admin';
   }
 
   getUsers(admin) {
     if (admin instanceof Admin) {
       return User.users;
     } else {
-      throw new Error("Access denied");
+      throw new Error('Access denied');
     }
   }
 }

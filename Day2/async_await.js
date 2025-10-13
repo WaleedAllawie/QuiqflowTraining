@@ -1,11 +1,9 @@
 //using promises
 
-const { rejects } = require("assert");
-
 const users = [
-  { name: "user1", id: 1 },
-  { name: "user2", id: 2 },
-  { name: "user3", id: 3 },
+  { name: 'user1', id: 1 },
+  { name: 'user2', id: 2 },
+  { name: 'user3', id: 3 },
 ];
 
 function fetchUsers() {
@@ -24,14 +22,14 @@ function createUser(user) {
       if (!err) {
         resolve();
       } else {
-        reject("There is an error");
+        reject('There is an error');
       }
     }, 2000);
   });
 }
 
 async function init() {
-  await createUser({ name: "userx", id: "x" });
+  await createUser({ name: 'userx', id: 'x' });
   fetchUsers();
 }
 
