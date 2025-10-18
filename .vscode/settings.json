@@ -3,5 +3,12 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
-  }
+  },
+  "turboConsoleLog.delimiterInsideMessage": "",
+  "turboConsoleLog.logFunction": "",
+  "turboConsoleLog.logMessagePrefix": "",
+  "turboConsoleLog.logMessageSuffix": "",
+  "turboConsoleLog.insertEnclosingClass": false,
+  "turboConsoleLog.insertEnclosingFunction": false,
+  "turboConsoleLog.isTurboTelemetryEnabled": true
 }
