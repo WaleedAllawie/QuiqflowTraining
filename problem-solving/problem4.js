@@ -27,5 +27,8 @@ const findLongestChain = (limit) => {
 
   return { number: maxNumber, terms: maxTerms };
 };
+//A more optimal solution would be using a hashmap and do memozation
+//so you dont calculate the chains u already calculated in previous numbers
+// but I couldnt write a working code of that on time haha but I tried!
 
 console.log(findLongestChain(1000000));
