@@ -13,6 +13,10 @@ Example:
 coinCombination(200p) //-> 73682
 */
 
+//this is a dynamic programmin problem which is a concept I am
+//familiar with, but it is very challenging to to solve
+//I did some research before remembering how this works, so this solution is not fully me
+
 const combinations = (target) => {
   const coins = [1, 2, 5, 10, 20, 50, 100, 200];
   const combs = new Array(target + 1).fill(0);
