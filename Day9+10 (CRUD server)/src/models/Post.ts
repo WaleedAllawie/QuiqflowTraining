@@ -1,5 +1,5 @@
 import { DataTypes, Model, Optional } from 'sequelize';
-import sequelize from '../config/database.js';
+import database from '../config/database.js';
 
 interface PostAttributes {
   id: number;
@@ -33,7 +33,7 @@ Post.init(
     },
   },
   {
-    sequelize,
+    sequelize: database.sequelize,
     tableName: 'posts',
     timestamps: true,
   }

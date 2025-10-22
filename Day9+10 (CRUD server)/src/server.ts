@@ -1,9 +1,9 @@
-import express from 'express';
+import express, { type Express } from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import process from 'process';
 import dotenv from 'dotenv';
-import sequelize from './config/database.js';
+import database from './config/database.js';
 import posts from './routes/posts.js';
 import logger from './middleware/logger.js';
 import errorHandler from './middleware/errorHandler.js';
@@ -11,43 +11,76 @@ import notFound from './middleware/notFound.js';
 
 dotenv.config();
 
-const app = express();
-const port: number | string = process.env.PORT || 8000;
+class Server {
+  private static instance: Server;
+  public app: Express;
+  private port: number | string;
+  private __dirname: string;
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+  private constructor() {
+    this.app = express();
+    this.port = process.env.PORT || 8000;
 
-// Test database connection and sync models
-const connectDB = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('✅ Database connected successfully');
+    const __filename = fileURLToPath(import.meta.url);
+    this.__dirname = path.dirname(__filename);
 
-    // Sync models (creates tables if they don't exist)
-    await sequelize.sync({ alter: true });
-    console.log('✅ Database synced');
-  } catch (error) {
-    console.error('❌ Unable to connect to database:', error);
-    process.exit(1);
+    this.initializeMiddlewares();
+    this.initializeRoutes();
+    this.initializeErrorHandlers();
   }
-};
 
-connectDB();
+  public static getInstance(): Server {
+    if (!Server.instance) {
+      Server.instance = new Server();
+    }
+    return Server.instance;
+  }
 
-//BODY PARSER
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+  private initializeMiddlewares(): void {
+    // Body parser
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: false }));
 
-//logger
-app.use(logger);
-//routes
-app.use('/api/posts', posts);
+    // Logger
+    this.app.use(logger);
+  }
 
-app.use(express.static(path.join(__dirname, '..', 'public')));
-//middlewares
-app.use(notFound);
-app.use(errorHandler);
+  private initializeRoutes(): void {
+    // API routes
+    this.app.use('/api/posts', posts);
 
-app.listen(port, () => {
-  console.log(`server is running on port 8000`);
-});
+    // Static files
+    this.app.use(express.static(path.join(this.__dirname, '..', 'public')));
+  }
+
+  private initializeErrorHandlers(): void {
+    // 404 handler
+    this.app.use(notFound);
+
+    // Error handler
+    this.app.use(errorHandler);
+  }
+
+  public async start(): Promise<void> {
+    try {
+      // Connect to database
+      await database.connect();
+
+      // Start server
+      this.app.listen(this.port, () => {
+        console.log(`Server is running on port ${this.port}`);
+      });
+    } catch (error) {
+      console.error('Failed to start server:', error);
+      process.exit(1);
+    }
+  }
+
+  public getApp(): Express {
+    return this.app;
+  }
+}
+
+// Initialize and start the server
+const server = Server.getInstance();
+server.start();
